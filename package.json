@@ -1,5 +1,5 @@
 {
-  "name": "node-js-getting-started",
+  "name": "js-getting-started",
   "version": "0.3.0",
   "description": "A sample Node.js app using Express 4",
   "engines": {
@@ -11,6 +11,8 @@
     "test": "node test.js"
   },
   "dependencies": {
+    "@slack/events-api": "^3.0.1",
+    "@slack/web-api": "^6.4.0",
     "ejs": "^3.1.5",
     "express": "^4.15.2"
   },
@@ -20,12 +22,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "git+https://github.com/heroku/node-js-getting-started.git"
   },
   "keywords": [
     "node",
     "heroku",
     "express"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/heroku/node-js-getting-started/issues"
+  },
+  "homepage": "https://github.com/heroku/node-js-getting-started#readme",
+  "author": ""
 }
