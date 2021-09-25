@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- <%- include ("../partials/header.ejs") %> -->
   <%- include ("../partials/header.ejs") %>
+  <%- include ("../partials/theme-header.ejs") %>
 </head>
-<body>
-  <%- include ("../partials/nav.ejs") %>
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="/lang-logo.png">
-    </a>
-  </div>
-</div>
-<div class="container">
-  <%- include ("../partials/chatbox.ejs") %>
-</div>
+<%- include ("../partials/body.ejs") %>
+<%- include ("../partials/footer.ejs") %>
 
-</body>
 </html>

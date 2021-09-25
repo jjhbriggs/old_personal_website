@@ -1,26 +1,32 @@
 <div id="content"></div>
-<div class="center">
-    <div class="chat">
-      <div class="contact bar">
-        <div class="pic stark"></div>
-        <div class="name">
-          Sample
+<div class="chatbox_wrapper">
+    <div class="center">
+        <div class="chat">
+            <div class="contact bar">
+                <div class="pic rec_msg"></div>
+                <div class="name">
+                Ask [name] a Question!
+                </div>
+                <div class="seen">
+                    <u>What is this?</u>
+                </div>
+            </div>
+            <div class="messages" id="chat">
+                <div class="time">
+                Today
+                </div>
+                <div id="messageList">
+                    <div class="message sent_msg">Test Message Sent</div>
+                    <div class="message rec_msg">Test Message Recieved</div>
+                    <!-- <div class="message rec_msg_nb">Test Message Recieved (not a bot)</div> -->
+                </div>
+            </div>
+            <div class="input">
+                <input placeholder="Message" type="text" /><button class="chat_btn"><i class="fa fa-paper-plane color_primary" style="color: #0463BB;"></i></button>
+            </div>
         </div>
-        <div class="seen">
-          Today at 12:56
-        </div>
-      </div>
-      <div class="messages" id="chat">
-        <div class="time">
-          Today at 11:41
-        </div>
-        <div id="messageList"></div>
-      </div>
-      <div class="input">
-        <input placeholder="press to type" type="text" /><button class="chat_btn"><i class="fa fa-paper-plane"></i></button>
-      </div>
     </div>
-  </div>
+</div>
   <script type="text/javascript">
     var chat = document.getElementById('chat');
     chat.scrollTop = chat.scrollHeight - chat.clientHeight; 
@@ -31,6 +37,6 @@
         const data = JSON.parse(message.data);      
       // Display the event data in the `content` div
         document.querySelector('#content').innerHTML = data.message;
-        document.getElementById('messageList').innerHTML += '<div class="message ' + ((data.sent) ? 'parker' : 'stark') + '">' + data.message + '</div>';
+        document.getElementById('messageList').innerHTML += '<div class="message ' + ((data.sent) ? 'sent_msg' : 'rec_msg') + '">' + data.message + '</div>';
     });
 </script>
