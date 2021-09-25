@@ -25,3 +25,8 @@
     .jumbotron .lang-logo img {
       max-width: 100%; }
 
+.chat_btn {
+  background-color: transparent; /* Blue background */
+  border: none; /* Remove borders */
+  cursor: pointer; /* Mouse pointer on hover */
+}
