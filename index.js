@@ -5,49 +5,56 @@ const chat = require('./chat');
 
 const { createEventAdapter } = require('@slack/events-api');
 const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
-var glob_msg = "nothing yet";
-let update_messages = false;
-slackEvents.on('message', (event) => {
-  console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text} at ${event.ts} with a thread_ts of at ${event.thread_ts}`);
-  if(event.user != undefined && event.user != "U02FH8D3HLK"){ //obviously change for proper id
-    console.log("sending thread reply");
-    if (event.thread_ts != undefined){ //reply is in a thread
-      chat.sendThreadReply("Hey, this should be threaded(reply)", event.thread_ts);
-    }else{
-      chat.sendThreadReply("Hey, this should be threaded", event.ts);
-    }
-    update_messages = true;
-  }
-  glob_msg = event.text
-});
-// Handle errors (see `errorCodes` export)
-slackEvents.on('error', console.error);
-
-express()
+app = express()
   .use(express.static(path.join(__dirname, 'public')))
   .use('/slack/events', slackEvents.expressMiddleware())
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
-  .get('/events', async function(req, res) {
-    res.set({
-      'Cache-Control': 'no-cache',
-      'Content-Type': 'text/event-stream',
-      'Connection': 'keep-alive'
-    });
-    res.flushHeaders();
-    // Tell the client to retry every 10 seconds if connectivity is lost
-    res.write('retry: 10000\n\n');
-    while (true) {
-      await new Promise(resolve => setTimeout(resolve, 1000)); //update every second at a minimum
-      if (update_messages){
-        res.write(`data: ${JSON.stringify({message: glob_msg, sent: false})}\n\n`);
-        update_messages = false;
+  .post('/dgevents', (req, res) => console.log("DGEVENTS----" + req))
+  //.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+io.on('connection', async function(socket) {
+  console.log('A user connected');
+  const client_ts = (await chat.sendMsg("[SYS_MSG] " + socket.id + " connected")).ts; 
+  socket.on('chat message', (msg) => {
+    io.emit('confirmed', msg);
+    chat.sendThreadReply("[USR_MSG]" + msg, client_ts);
+  });
+  slackEvents.on('message', (event) => {
+      console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text} at ${event.ts} with a thread_ts of at ${event.thread_ts}`);
+      if(!event.text.startsWith("[USR_MSG]") && !event.text.startsWith("[SYS_MSG]")){ //need to check that this message has the correct thread_ts
+        io.emit('recieved', event.text.slice(9));
       }
-      
-    }
-  })
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-//chat.sendTime();
+      if(event.user != undefined && !event.text.startsWith("[BOT_MSG]") && !event.text.startsWith("[SYS_MSG]")){
+        if (event.thread_ts != undefined){ //reply is in a thread
+          chat.sendThreadReply("[BOT_MSG] @C02FN82PDE0 Hey, this should be threaded(reply)", event.thread_ts);
+        }else{
+          chat.sendThreadReply("[BOT_MSG] Hey, this should be threaded", event.ts);
+        }
+      }
+  });
+  // Handle errors (see `errorCodes` export)
+  slackEvents.on('error', console.error);
+  socket.on('disconnect', function () {
+    console.log('A user disconnected.. deleteing stuff');
+    delete client_ts;
+    slackEvents.removeAllListeners();
+    delete slackEvents;
+ });
+
+});
+http.listen(PORT, function() {
+  console.log(`Listening on ${ PORT }`);
+});
 
 // Attach the event adapter to the express app as a middleware
+
+//socket.id to get the id of the current connection. change the send message code to allow the bot responses to show up
+//so bot becomes both ends instead of just one, but make one end the auto responses and one the user chats
+//have the conenction established create a thread (just a message with an id, time, and location), and everything gets
+//sent as a thread message under that (not the template messages already there). so the first message will be the user saying something
+//and then the rest will be the user typing, or the dialogflow responses

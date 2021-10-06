@@ -23,6 +23,26 @@ module.exports = {
 
     })();
   },
+  async sendMsg(msg){
+    // An access token (from your Slack app or custom integration - xoxp, xoxb)
+    const web = new WebClient(process.env.SLACK_TOKEN);
+    // The current date
+
+    // (async () => {
+
+      try {
+        // Use the `chat.postMessage` method to send a message from this app
+        result =  await web.chat.postMessage({
+          channel: '#chat-test',
+          text: msg,
+        });
+        return result;
+      } catch (error) {
+        console.log(error);
+      }
+
+    //})();
+  },
   sendThreadReply(msg, ts_in){
     // An access token (from your Slack app or custom integration - xoxp, xoxb)
     const web = new WebClient(process.env.SLACK_TOKEN);
