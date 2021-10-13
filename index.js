@@ -11,10 +11,8 @@ app = express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
-  .post('/dgevents', function(req, res){
-   
+  .post('/', function(req, res){
     console.log(req.body);
-   
     res.end();
   });
   //.listen(PORT, () => console.log(`Listening on ${ PORT }`));
