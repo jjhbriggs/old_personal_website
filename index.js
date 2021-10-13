@@ -8,10 +8,12 @@ const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
 app = express()
   .use(express.static(path.join(__dirname, 'public')))
   .use('/slack/events', slackEvents.expressMiddleware())
+  .use(express.json())
+  .use(express.urlencoded())
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
-  .post('/', function(req, res){
+  .post('/dgevents', function(req, res){
     console.log(req.body);
     res.end();
   });
