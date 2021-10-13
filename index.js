@@ -5,6 +5,8 @@ const chat = require('./chat');
 
 const { createEventAdapter } = require('@slack/events-api');
 const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 app = express()
   .use(express.static(path.join(__dirname, 'public')))
   .use('/slack/events', slackEvents.expressMiddleware())
@@ -14,14 +16,12 @@ app = express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
   .post('/dgevents', function(req, res){
-    console.log(JSON.stringify(req.body.queryResult.fulfillmentMessages[1].text.text));
+    let text = JSON.stringify(req.body.queryResult.fulfillmentMessages[1].text.text);
+    io.emit('recieved', text);
     res.end();
   });
   //.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
 io.on('connection', async function(socket) {
   console.log('A user connected');
   const client_ts = (await chat.sendMsg("[SYS_MSG] " + socket.id + " connected")).ts; 
