@@ -14,7 +14,7 @@ app = express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
   .post('/dgevents', function(req, res){
-    console.log(JSON.stringify(req.body));
+    console.log(JSON.stringify(req.body.fulfillmentMessages[0].text.text));
     res.end();
   });
   //.listen(PORT, () => console.log(`Listening on ${ PORT }`));
