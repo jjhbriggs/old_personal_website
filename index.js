@@ -17,8 +17,11 @@ app = express()
   const http = require('http').Server(app);
   const io = require('socket.io')(http);
   app.post('/dgevents', function(req, res){
-    let text = JSON.stringify(req.body.queryResult.fulfillmentMessages[1].text.text);
+    for (const msg of req.body.queryResult.fulfillmentMessages[1].text.text) {
+      let text = JSON.stringify(msg);
     io.emit('recieved', text);
+    }
+    
     res.end();
   });
   //.listen(PORT, () => console.log(`Listening on ${ PORT }`));
