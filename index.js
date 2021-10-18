@@ -26,7 +26,6 @@ app = express()
   const fs = require('fs');
   fs.writeFileSync('key.json', process.env.DG_SECRET);
   app.post('/api/text-input', async (req, res) => {
-    console.log( path.join(__dirname, 'key.json'));
     // Create a new session
     const sessionClient = new Dialogflow.SessionsClient({
       keyFilename: path.join(__dirname, 'key.json'),
@@ -63,23 +62,54 @@ app = express()
 
 io.on('connection', async function(socket) {
   console.log('A user connected');
-  const client_ts = (await chat.sendMsg("[SYS_MSG] " + socket.id + " connected")).ts; 
-  socket.on('chat message', (msg) => {
+  //const client_ts = (await chat.sendMsg("[SYS_MSG] " + socket.id + " connected")).ts; 
+  socket.on('user-message', (msg) => {
     io.emit('confirmed', msg);
-    chat.sendThreadReply("[USR_MSG]" + msg, client_ts);
+    const sessionClient = new Dialogflow.SessionsClient({
+      keyFilename: path.join(__dirname, 'key.json'),
+    });
+    const sessionPath = sessionClient.projectAgentSessionPath(
+      process.env.PROJECT_ID,
+      v4()
+    );
+    // The dialogflow request object
+    const request = {
+      session: sessionPath,
+      queryInput: {
+        text: {
+          // The query to send to the dialogflow agent
+          text: req.body.message,
+          languageCode: "en",
+        },
+      },
+    };
+
+    // Sends data from the agent as a response
+    try {
+      const responses = await sessionClient.detectIntent(request);
+      for (const msg of responses[0].queryResult.fulfillmentMessages[1].text.text) {
+        io.emit('recieved', msg);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+
+    // chat.sendThreadReply("[USR_MSG]" + msg, client_ts);
   });
   slackEvents.on('message', (event) => {
-      console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text} at ${event.ts} with a thread_ts of at ${event.thread_ts}`);
-      if(!event.text.startsWith("[USR_MSG]") && !event.text.startsWith("[SYS_MSG]")){ //need to check that this message has the correct thread_ts
-        io.emit('recieved', event.text.slice(9));
-      }
-      if(event.user != undefined && !event.text.startsWith("[BOT_MSG]") && !event.text.startsWith("[SYS_MSG]")){
-        if (event.thread_ts != undefined){ //reply is in a thread
-          chat.sendThreadReply("[BOT_MSG] @C02FN82PDE0 Hey, this should be threaded(reply)", event.thread_ts);
-        }else{
-          chat.sendThreadReply("[BOT_MSG] Hey, this should be threaded", event.ts);
-        }
-      }
+
+      // console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text} at ${event.ts} with a thread_ts of at ${event.thread_ts}`);
+      // if(!event.text.startsWith("[USR_MSG]") && !event.text.startsWith("[SYS_MSG]")){ //need to check that this message has the correct thread_ts
+      //   io.emit('recieved', event.text.slice(9));
+      // }
+      // if(event.user != undefined && !event.text.startsWith("[BOT_MSG]") && !event.text.startsWith("[SYS_MSG]")){
+      //   if (event.thread_ts != undefined){ //reply is in a thread
+      //     chat.sendThreadReply("[BOT_MSG] @C02FN82PDE0 Hey, this should be threaded(reply)", event.thread_ts);
+      //   }else{
+      //     chat.sendThreadReply("[BOT_MSG] Hey, this should be threaded", event.ts);
+      //   }
+      // }
   });
   // Handle errors (see `errorCodes` export)
   slackEvents.on('error', console.error);
