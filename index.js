@@ -25,7 +25,7 @@ app = express()
   const io = require('socket.io')(http);
   const fs = require('fs');
   fs.writeFileSync('key.json', process.env.DG_SECRET);
-  app.post('/text-input', async (req, res) => {
+  app.post('/api/text-input', async (req, res) => {
     console.log( path.join(__dirname, 'key.json'));
     // Create a new session
     const sessionClient = new Dialogflow.SessionsClient({
@@ -51,10 +51,7 @@ app = express()
     try {
       const responses = await sessionClient.detectIntent(request);
       for (const msg of responses[0].queryResult.fulfillmentMessages[1].text.text) {
-        console.log(msg);
-        let text = JSON.stringify(msg);
-        console.log(text);
-        io.emit('recieved', text);
+        io.emit('recieved', msg);
       }
       res.status(200).send({ data: responses });
     } catch (e) {
@@ -63,15 +60,6 @@ app = express()
     }
     res.end();
   });
-  app.post('/dgevents', function(req, res){
-    for (const msg of req.body.queryResult.fulfillmentMessages[1].text.text) {
-      let text = JSON.stringify(msg);
-    io.emit('recieved', text);
-    }
-    
-    res.end();
-  });
-  //.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 io.on('connection', async function(socket) {
   console.log('A user connected');
