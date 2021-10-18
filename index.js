@@ -23,7 +23,7 @@ app = express()
   .use(cors())
   .post('/text-input', async (req, res) => {
     const { message } = req.body;
-
+    console.log(message);
     // Create a new session
     const sessionClient = new Dialogflow.SessionsClient({
       keyFilename: Path.join(__dirname, "./key.json"),
