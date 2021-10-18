@@ -19,7 +19,37 @@ app = express()
   .set('view engine', 'ejs')
   .use(cors())
   .post('/text-input', (req, res) => {
-    res.status(200).send({ data : "TEXT ENDPOINT CONNECTION SUCCESSFUL" })
+    const { message } = req.body;
+
+    // Create a new session
+    const sessionClient = new Dialogflow.SessionsClient({
+      keyFilename: Path.join(__dirname, "./key.json"),
+    });
+
+    const sessionPath = sessionClient.projectAgentSessionPath(
+      process.env.PROJECT_ID,
+      uuid()
+    );
+
+    // The dialogflow request object
+    const request = {
+      session: sessionPath,
+      queryInput: {
+        text: {
+          // The query to send to the dialogflow agent
+          text: message,
+        },
+      },
+    };
+
+    // Sends data from the agent as a response
+    try {
+      const responses = await sessionClient.detectIntent(request);
+      res.status(200).send({ data: responses });
+    } catch (e) {
+      console.log(e);
+      res.status(422).send({ e });
+    }
   })
 
   .get('/', (req, res) => res.render('pages/index'));
