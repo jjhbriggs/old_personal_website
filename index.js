@@ -30,7 +30,8 @@ app = express()
     const sessionClient = new Dialogflow.SessionsClient({
       keyFilename: Path.join(__dirname, "./key.json"),
     });
-
+    console.log(process.env.PROJECT_ID);
+    console.log(v4());
     const sessionPath = sessionClient.projectAgentSessionPath(
       process.env.PROJECT_ID,
       v4()
