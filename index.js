@@ -19,7 +19,7 @@ app = express()
   .set('view engine', 'ejs')
   .use(cors())
   .post('/text-input', (req, res) => {
-    res.status(200);
+    res.status(200).send({ data : "TEXT ENDPOINT CONNECTION SUCCESSFUL" })
   })
 
   .get('/', (req, res) => res.render('pages/index'));
