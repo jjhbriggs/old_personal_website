@@ -2,7 +2,6 @@ const express = require('express')
 const dotenv =  require("dotenv")
 const Dialogflow = require("@google-cloud/dialogflow")
 const { v4 } = require("uuid")
-const Path = require("path")
 const cors =  require("cors")
 dotenv.config();
 
@@ -28,7 +27,7 @@ app = express()
     console.log(req.body.message);
     // Create a new session
     const sessionClient = new Dialogflow.SessionsClient({
-      keyFilename: Path.join(__dirname, "./key.json"),
+      keyFilename: path.join(__dirname, "./key.json"),
     });
     console.log(process.env.PROJECT_ID);
     console.log(v4());
