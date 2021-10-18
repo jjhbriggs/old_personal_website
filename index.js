@@ -25,8 +25,7 @@ app = express()
   const http = require('http').Server(app);
   const io = require('socket.io')(http);
   app.post('/text-input', async (req, res) => {
-    const { message } = req.body;
-    console.log(message);
+    console.log(req.body);
     // Create a new session
     const sessionClient = new Dialogflow.SessionsClient({
       keyFilename: Path.join(__dirname, "./key.json"),
@@ -43,7 +42,7 @@ app = express()
       queryInput: {
         text: {
           // The query to send to the dialogflow agent
-          text: message,
+          text: req.body,
         },
       },
     };
