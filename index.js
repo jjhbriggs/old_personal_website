@@ -45,6 +45,7 @@ app = express()
         text: {
           // The query to send to the dialogflow agent
           text: req.body.message,
+          languageCode: "en",
         },
       },
     };
