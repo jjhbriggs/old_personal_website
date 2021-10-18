@@ -50,7 +50,7 @@ app = express()
     // Sends data from the agent as a response
     try {
       const responses = await sessionClient.detectIntent(request);
-      console.log(responses[0].queryResult.fulfillmentMessages[1])
+      console.log(responses[0].queryResult.fulfillmentMessages[1].text.text[0])
       res.status(200).send({ data: responses });
     } catch (e) {
       console.log(e);
