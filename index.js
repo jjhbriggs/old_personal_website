@@ -18,7 +18,7 @@ app = express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .use(cors())
-  .post('/text-input', (req, res) => {
+  .post('/text-input', async (req, res) => {
     const { message } = req.body;
 
     // Create a new session
