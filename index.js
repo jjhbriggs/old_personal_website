@@ -25,8 +25,8 @@ app = express()
   const http = require('http').Server(app);
   const io = require('socket.io')(http);
   app.post('/text-input', async (req, res) => {
-    const { message } = req.body;
-    console.log(req.body);
+    const { message } = req.body.message;
+    console.log(message);
     // Create a new session
     const sessionClient = new Dialogflow.SessionsClient({
       keyFilename: Path.join(__dirname, "./key.json"),
