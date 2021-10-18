@@ -1,4 +1,8 @@
 const express = require('express')
+const dotenv =  require("dotenv")
+const cors =  require("cors")
+dotenv.config();
+
 const path = require('path')
 const PORT = process.env.PORT || 5000
 const chat = require('./chat');
@@ -13,6 +17,11 @@ app = express()
   .use(express.urlencoded())
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
+  .use(cors())
+  .post("/text-input", (req, res) => {
+    res.status(200).send({ data : "TEXT ENDPOINT CONNECTION SUCCESSFUL" })
+  })
+
   .get('/', (req, res) => res.render('pages/index'));
   const http = require('http').Server(app);
   const io = require('socket.io')(http);
