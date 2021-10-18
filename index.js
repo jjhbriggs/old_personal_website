@@ -53,6 +53,7 @@ app = express()
       console.log(e);
       res.status(422).send({ e });
     }
+    res.end();
   })
 
   .get('/', (req, res) => res.render('pages/index'));
