@@ -78,7 +78,7 @@ io.on('connection', async function(socket) {
       queryInput: {
         text: {
           // The query to send to the dialogflow agent
-          text: req.body.message,
+          text: msg,
           languageCode: "en",
         },
       },
