@@ -11,6 +11,7 @@
     "test": "node test.js"
   },
   "dependencies": {
+    "@google-cloud/dialogflow": "^4.5.0",
     "@slack/events-api": "^3.0.1",
     "@slack/web-api": "^6.4.0",
     "cors": "^2.8.5",
