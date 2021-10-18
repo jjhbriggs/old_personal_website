@@ -35,7 +35,7 @@ app = express()
       process.env.PROJECT_ID,
       v4()
     );
-
+    console.log(sessionPath);
     // The dialogflow request object
     const request = {
       session: sessionPath,
