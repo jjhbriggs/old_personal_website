@@ -87,8 +87,8 @@ io.on('connection', async function(socket) {
     // Sends data from the agent as a response
     try {
       const responses = await sessionClient.detectIntent(request);
-      for (const msg of responses[0].queryResult.fulfillmentMessages[0].text.text) {
-        io.emit('recieved', msg);
+      for (const msg of responses[0].queryResult.fulfillmentMessages) {
+        io.emit('recieved', msg.text.text);
       }
     } catch (e) {
       console.log(e);
