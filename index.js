@@ -27,7 +27,7 @@ app = express()
     console.log(req.body.message);
     // Create a new session
     const sessionClient = new Dialogflow.SessionsClient({
-      keyFilename: "./key.json",
+      keyFilename: "key.json",
     });
     console.log(process.env.PROJECT_ID);
     console.log(v4());
