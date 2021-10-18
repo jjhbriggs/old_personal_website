@@ -1,5 +1,8 @@
 const express = require('express')
 const dotenv =  require("dotenv")
+const Dialogflow = require("@google-cloud/dialogflow")
+const { v4 } = require("uuid")
+const Path = require("path")
 const cors =  require("cors")
 dotenv.config();
 
@@ -28,7 +31,7 @@ app = express()
 
     const sessionPath = sessionClient.projectAgentSessionPath(
       process.env.PROJECT_ID,
-      uuid()
+      v4()
     );
 
     // The dialogflow request object
