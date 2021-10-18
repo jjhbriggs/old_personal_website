@@ -31,13 +31,10 @@ app = express()
     const sessionClient = new Dialogflow.SessionsClient({
       keyFilename: path.join(__dirname, 'key.json'),
     });
-    console.log(process.env.PROJECT_ID);
-    console.log(v4());
     const sessionPath = sessionClient.projectAgentSessionPath(
       process.env.PROJECT_ID,
       v4()
     );
-    console.log(sessionPath);
     // The dialogflow request object
     const request = {
       session: sessionPath,
@@ -53,6 +50,7 @@ app = express()
     // Sends data from the agent as a response
     try {
       const responses = await sessionClient.detectIntent(request);
+      console.log(request.queryResult.fulfillmentMessages[1].text.text)
       res.status(200).send({ data: responses });
     } catch (e) {
       console.log(e);
