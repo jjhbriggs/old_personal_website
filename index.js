@@ -18,8 +18,8 @@ app = express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .use(cors())
-  .post("/text-input", (req, res) => {
-    res.status(200).send({ data : "TEXT ENDPOINT CONNECTION SUCCESSFUL" })
+  .post('/text-input', (req, res) => {
+    res.status(200);
   })
 
   .get('/', (req, res) => res.render('pages/index'));
