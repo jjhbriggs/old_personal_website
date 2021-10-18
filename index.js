@@ -21,7 +21,10 @@ app = express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .use(cors())
-  .post('/text-input', async (req, res) => {
+  .get('/', (req, res) => res.render('pages/index'));
+  const http = require('http').Server(app);
+  const io = require('socket.io')(http);
+  app.post('/text-input', async (req, res) => {
     const { message } = req.body;
     console.log(req.body);
     // Create a new session
@@ -54,11 +57,7 @@ app = express()
       res.status(422).send({ e });
     }
     res.end();
-  })
-
-  .get('/', (req, res) => res.render('pages/index'));
-  const http = require('http').Server(app);
-  const io = require('socket.io')(http);
+  });
   app.post('/dgevents', function(req, res){
     for (const msg of req.body.queryResult.fulfillmentMessages[1].text.text) {
       let text = JSON.stringify(msg);
