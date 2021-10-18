@@ -23,6 +23,8 @@ app = express()
   .get('/', (req, res) => res.render('pages/index'));
   const http = require('http').Server(app);
   const io = require('socket.io')(http);
+  const fs = require('fs');
+  fs.writeFileSync('key.json', process.env.DG_SECRET);
   app.post('/text-input', async (req, res) => {
     console.log( path.join(__dirname, 'key.json'));
     // Create a new session
