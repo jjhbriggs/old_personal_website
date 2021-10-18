@@ -50,8 +50,7 @@ app = express()
     // Sends data from the agent as a response
     try {
       const responses = await sessionClient.detectIntent(request);
-      const msg = responses[0].queryResult.fulfillmentMessages[1].text.text;
-      for (const msg of req.body.queryResult.fulfillmentMessages[1].text.text) {
+      for (const msg of responses[0].queryResult.fulfillmentMessages[1].text.text) {
         console.log(msg);
         let text = JSON.stringify(msg);
         console.log(text);
