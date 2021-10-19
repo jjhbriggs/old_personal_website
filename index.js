@@ -1,3 +1,4 @@
+// update the dg links to use actual links to sections and sites, including the "Read more about it in the ‘Recent Projects’ section."" bubbles
 const express = require('express')
 const dotenv =  require("dotenv")
 const Dialogflow = require("@google-cloud/dialogflow")
