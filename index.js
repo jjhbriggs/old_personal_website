@@ -58,8 +58,9 @@ app = express()
   });
 
 io.on('connection', async function(socket) {
-  console.log('A user connected');
+  console.log(socket.id + ' connected');
   //const client_ts = (await chat.sendMsg("[SYS_MSG] " + socket.id + " connected")).ts; 
+
   socket.on('user-message', async (msg) => {
     io.emit('confirmed', msg);
     const sessionClient = new Dialogflow.SessionsClient({
