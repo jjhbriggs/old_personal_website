@@ -35,16 +35,6 @@
 <script src = "/socket.io/socket.io.js"></script> 
 <script type="text/javascript">
     var chat = document.getElementById('chat');
-    
-
-    // const source = new EventSource('/events');
-
-    // source.addEventListener('message', message => {
-    //     const data = JSON.parse(message.data);      
-    //   // Display the event data in the `content` div
-    //     document.querySelector('#content').innerHTML = data.message;
-    //     document.getElementById('messageList').innerHTML += '<div class="message ' + ((data.sent) ? 'sent_msg' : 'rec_msg') + '">' + data.message + '</div>';
-    // });
     const socket = io();
     var form = document.getElementById('sio_form');
     var input = document.getElementById('sio_input');

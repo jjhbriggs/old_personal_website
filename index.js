@@ -10,12 +10,8 @@ const path = require('path')
 const PORT = process.env.PORT || 5000
 const chat = require('./chat');
 
-const { createEventAdapter } = require('@slack/events-api');
-const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
-
 app = express()
   .use(express.static(path.join(__dirname, 'public')))
-  .use('/slack/events', slackEvents.expressMiddleware())
   .use(express.json())
   .use(express.urlencoded())
   .set('views', path.join(__dirname, 'views'))
@@ -98,22 +94,6 @@ io.on('connection', async function(socket) {
 
     // chat.sendThreadReply("[USR_MSG]" + msg, client_ts);
   });
-  slackEvents.on('message', (event) => {
-
-      // console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text} at ${event.ts} with a thread_ts of at ${event.thread_ts}`);
-      // if(!event.text.startsWith("[USR_MSG]") && !event.text.startsWith("[SYS_MSG]")){ //need to check that this message has the correct thread_ts
-      //   io.emit('recieved', event.text.slice(9));
-      // }
-      // if(event.user != undefined && !event.text.startsWith("[BOT_MSG]") && !event.text.startsWith("[SYS_MSG]")){
-      //   if (event.thread_ts != undefined){ //reply is in a thread
-      //     chat.sendThreadReply("[BOT_MSG] @C02FN82PDE0 Hey, this should be threaded(reply)", event.thread_ts);
-      //   }else{
-      //     chat.sendThreadReply("[BOT_MSG] Hey, this should be threaded", event.ts);
-      //   }
-      // }
-  });
-  // Handle errors (see `errorCodes` export)
-  slackEvents.on('error', console.error);
   socket.on('disconnect', function () {
     console.log('A user disconnected.. deleteing stuff');
     delete client_ts;
