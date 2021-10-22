@@ -23,13 +23,10 @@ app = express()
 
 io.on('connection', async function(socket) {
   console.log(socket.id + ' connected');
-  io.to(socket.id).emit('confirmed', 'hey');
-  io.sockets.to(socket.id).emit('confirmed', 'message to specific user');
-  socket.broadcast.to(socket.id).emit('confirmed', 'test 3');
   //const client_ts = (await chat.sendMsg("[SYS_MSG] " + socket.id + " connected")).ts; 
 
   socket.on('user-message', async (msg) => {
-    socket.broadcast.to(socket.id).emit('confirmed', msg);
+    io.sockets.to(socket.id).emit('confirmed', msg);
     const sessionClient = new Dialogflow.SessionsClient({
       keyFilename: path.join(__dirname, 'key.json'),
     });
@@ -53,7 +50,7 @@ io.on('connection', async function(socket) {
     try {
       const responses = await sessionClient.detectIntent(request);
       for (const msg of responses[0].queryResult.fulfillmentMessages) {
-        socket.broadcast.to(socket.id).emit('recieved', msg.text.text);
+        io.sockets.to(socket.id).emit('recieved', msg.text.text);
       }
     } catch (e) {
       console.log(e);
@@ -70,11 +67,3 @@ io.on('connection', async function(socket) {
 http.listen(PORT, function() {
   console.log(`Listening on ${ PORT }`);
 });
-
-// Attach the event adapter to the express app as a middleware
-
-//socket.id to get the id of the current connection. change the send message code to allow the bot responses to show up
-//so bot becomes both ends instead of just one, but make one end the auto responses and one the user chats
-//have the conenction established create a thread (just a message with an id, time, and location), and everything gets
-//sent as a thread message under that (not the template messages already there). so the first message will be the user saying something
-//and then the rest will be the user typing, or the dialogflow responses
