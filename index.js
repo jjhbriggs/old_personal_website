@@ -15,7 +15,8 @@ app = express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .use(cors())
-  .get('/', (req, res) => res.render('pages/index'));
+  .get('/', (req, res) => res.render('pages/index'))
+  .get('/detail2', (req, res) => res.render('pages/detail2'));
   const http = require('http').Server(app);
   const io = require('socket.io')(http);
   const fs = require('fs');
