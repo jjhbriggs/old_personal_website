@@ -62,7 +62,7 @@ io.on('connection', async function(socket) {
   //const client_ts = (await chat.sendMsg("[SYS_MSG] " + socket.id + " connected")).ts; 
 
   socket.on('user-message', async (msg) => {
-    io.emit('confirmed', msg);
+    socket.broadcast.to(socket.id).emit('confirmed', msg);
     const sessionClient = new Dialogflow.SessionsClient({
       keyFilename: path.join(__dirname, 'key.json'),
     });
@@ -86,7 +86,7 @@ io.on('connection', async function(socket) {
     try {
       const responses = await sessionClient.detectIntent(request);
       for (const msg of responses[0].queryResult.fulfillmentMessages) {
-        io.emit('recieved', msg.text.text);
+        socket.broadcast.to(socket.id).emit('recieved', msg.text.text);
       }
     } catch (e) {
       console.log(e);
