@@ -97,9 +97,6 @@ io.on('connection', async function(socket) {
   });
   socket.on('disconnect', function () {
     console.log('A user disconnected.. deleteing stuff');
-    delete client_ts;
-    slackEvents.removeAllListeners();
-    delete slackEvents;
  });
 
 });
