@@ -8,8 +8,6 @@ dotenv.config();
 
 const path = require('path')
 const PORT = process.env.PORT || 5000
-const chat = require('./chat');
-
 app = express()
   .use(express.static(path.join(__dirname, 'public')))
   .use(express.json())
@@ -22,43 +20,10 @@ app = express()
   const io = require('socket.io')(http);
   const fs = require('fs');
   fs.writeFileSync('key.json', process.env.DG_SECRET);
-  app.post('/api/text-input', async (req, res) => {
-    // Create a new session
-    const sessionClient = new Dialogflow.SessionsClient({
-      keyFilename: path.join(__dirname, 'key.json'),
-    });
-    const sessionPath = sessionClient.projectAgentSessionPath(
-      process.env.PROJECT_ID,
-      v4()
-    );
-    // The dialogflow request object
-    const request = {
-      session: sessionPath,
-      queryInput: {
-        text: {
-          // The query to send to the dialogflow agent
-          text: req.body.message,
-          languageCode: "en",
-        },
-      },
-    };
-
-    // Sends data from the agent as a response
-    try {
-      const responses = await sessionClient.detectIntent(request);
-      for (const msg of responses[0].queryResult.fulfillmentMessages[1].text.text) {
-        io.emit('recieved', msg);
-      }
-      res.status(200).send({ data: responses });
-    } catch (e) {
-      console.log(e);
-      res.status(422).send({ e });
-    }
-    res.end();
-  });
 
 io.on('connection', async function(socket) {
   console.log(socket.id + ' connected');
+  io.to(socket.id).emit('hey')
   //const client_ts = (await chat.sendMsg("[SYS_MSG] " + socket.id + " connected")).ts; 
 
   socket.on('user-message', async (msg) => {
