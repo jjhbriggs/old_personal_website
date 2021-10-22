@@ -23,7 +23,9 @@ app = express()
 
 io.on('connection', async function(socket) {
   console.log(socket.id + ' connected');
-  io.to(socket.id).emit('hey')
+  io.to(socket.id).emit('confirmed', 'hey');
+  io.sockets.to(socket.id).emit('confirmed', 'message to specific user');
+  socket.broadcast.to(socket.id).emit('confirmed', 'test 3');
   //const client_ts = (await chat.sendMsg("[SYS_MSG] " + socket.id + " connected")).ts; 
 
   socket.on('user-message', async (msg) => {
