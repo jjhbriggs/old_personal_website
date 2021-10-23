@@ -16,6 +16,7 @@ app = express()
   .set('view engine', 'ejs')
   .use(cors())
   .get('/', (req, res) => res.render('pages/index'))
+  .get('/detail1', (req, res) => res.render('pages/detail1'))
   .get('/detail2', (req, res) => res.render('pages/detail2'));
   const http = require('http').Server(app);
   const io = require('socket.io')(http);
