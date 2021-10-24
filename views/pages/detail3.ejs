@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ("../partials/theme-header.ejs") %>
+</head>
+
+<body>
+
+  <main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-5">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img src="pennapps1.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="pennapps2.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="pennapps3.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="pennapps4.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                  <img src="pennapps5.jpg" alt="">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <h2>PennApps Music App</h2>
+            <div class="portfolio-info">
+              <ul>
+                <li><strong>Project timeline</strong>: Fall 2021</li>
+                <li><strong>Devpost URL</strong>: <a href="https://devpost.com/software/pennapps-music-app" target="_blank">devpost.com/software/pennapps-music-app</a></li>
+                <li><strong>Github URL</strong>: <a href="" target="_blank">insert github link</a></li>
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <p style="font-size: 14px">
+                My hackathon project idea was a novel music app intended to help address centralization in the music industry by directly connecting listeners and small artists.<br><br>
+
+                The premise of the app is an endless, tailored stream of music created by smaller artists in the community, 
+                which listeners can interact with in various ways in order to promote it within the platform. <br><br>
+
+                To test the app yourself, or read more about the idea, inspiration, and technology, check out the Devpost link above. ☝️
+
+                <i>Javascript | Typescript | React Native | MongoDB (+Atlas & Realm) | Expo</i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+  <%- include ("../partials/footer.ejs") %>
+
+</body>
+
+</html>
