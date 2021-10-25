@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ("../partials/theme-header.ejs") %>
+</head>
+
+<body>
+
+  <main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-5">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img src="piano1.jpg" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="piano2.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                  <img src="piano3.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                  <img src="piano4.jpg" alt="">
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <h2>Piano Playing Robot</h2>
+            <div class="portfolio-info">
+              <ul>
+                <li><strong>Project timeline</strong>: Summer 2019</li>
+                <li><strong>Performance Video</strong>: <a href="" target="_blank">insert performance link</a></li>
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <p style="font-size: 14px">
+                A robot that can play a weighted keyboard, designed to play <i>Foreplay / Longtime</i> by Boston, as part of a
+                larger orchistra of robotic instruments.<br><br>
+
+                The system begins playing syncronously with the other instruments via UDP signals, 
+                and drives 18 DC motors bidirectionally using the 15 GPIO pins of a NodeMCU. 
+                The majority of the circuit shown is a combination of demultiplexers and hex inverters designed
+                to drive three states (clockwise, counterclockwise, off) of 18 motors with this limited number of GPIO pins. 
+                <br>
+                This project was built with two other students as part of a summer robotics course (ESAP Robotics 2019) for credit at the University of Pennsylvania.
+
+                <br><br>
+                Check out the video above to watch it in action. 🎥☝️
+                <br><br>
+                <i>C++ | NodeMCU</i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+  <%- include ("../partials/footer.ejs") %>
+
+</body>
+
+</html>
