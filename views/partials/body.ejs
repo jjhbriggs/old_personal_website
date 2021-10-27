@@ -394,8 +394,7 @@
     
     $('div.collapse-button').click(function(){
         $('div.collapse-content').slideToggle();
-        console.log($( this ).html);
-        if ($( this ).html == "<span><b>Show More</b></span>"){
+        if ($( this ).html() == "<span><b>Show More</b></span>"){
             $( this ).html("<span><b>Show Less</b></span>");
         } else {
             $( this ).html("<span><b>Show More</b></span>");
