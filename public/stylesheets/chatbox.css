@@ -24,16 +24,21 @@ Modified by John Briggs, 2021
   .center {
     left: 50%;
   }
+}
+@media (min-width: 992px) {
+  .center {
+    left: 75%;
+  }
+  
+}
+@media (max-width: 425px) {
   .chat {
     width: 85vw;
     height: 135vw;
     text-align: left;
   }
 }
-@media (min-width: 992px) {
-  .center {
-    left: 75%;
-  }
+@media (min-width: 425px) {
   .chat {
     width: 24rem;
     height: 38rem;
