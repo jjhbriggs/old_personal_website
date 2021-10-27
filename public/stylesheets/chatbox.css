@@ -24,7 +24,7 @@ Modified by John Briggs, 2021
     height: 15rem;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 992px) and (min-width: 375px) {
   .center {
     left: 50%;
     transform: translate(-50%, 20%);
