@@ -393,19 +393,13 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </body>
 <script>
+    
     $('div.collapse-button').click(function(){
-        alert("pressed");
-        var content = $('div.collapse-content');
-        console.log(content);
-        console.log(content.css( "maxHeight" ));
-        console.log(content.css( "scrollHeight"));
-        
-        if (content.css( "maxHeight" )!=0){
-            content.css( "maxHeight" , 0);
-            $( this ).html("<span><b>Show More</b></span>");
-        } else {
-            content.css( "maxHeight" , content.css( "scrollHeight")+"px");
+        $('div.collapse-content').slideToggle();
+        if ($( this ).html == "<span><b>Show More</b></span>"){
             $( this ).html("<span><b>Show Less</b></span>");
+        } else {
+            $( this ).html("<span><b>Show More</b></span>");
         } 
     });
 </script>
