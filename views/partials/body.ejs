@@ -22,6 +22,7 @@
     <%- include ("../partials/chatbox.ejs") %>
     <h1>Sample Title</h1>
     <p>Develops with: <span class="typed" data-typed-items="Python, Javascript, C++, HTML"></span></p>
+    <!-- Python,Javascript,C++,C#,Rust,SQL,HTML,CSS,Typescript,Bash,Java,PHP,Tensorflow,Django,Node.js,Express.js,React.js,React Native -->
     <div class="social-links">
     <a href="https://github.com/jjhbriggs" class="github" target="_blank"><i class="bx bxl-github"></i></a>
     <a href="https://www.linkedin.com/in/jjhbriggs/" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
@@ -54,6 +55,8 @@
             embedded systems on an electric racecar as part of the software team on <a href="https://www.pennelectricracing.com/">Penn Electric Racing</a>, 
             and exploring my topics of interest through independent projects. <br><br>
             Moving forward, I am hoping to get involved with projects and research related to autonomous robotics.
+            <br><br>
+            To learn more about me, talk to my chatbot above, and explore the rest of the website.
         </p>
         <div class="row">
             <div class="col-lg-6">
@@ -415,4 +418,16 @@
             $( this ).html("<span><b>Show More</b></span>");
         } 
     });
+    //randomly shuffle the list on the homepage
+    function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+    $("span.typed").attr("data-typed-items",shuffle(["Python","Javascript","C++","C#","Rust","SQL","HTML","CSS","Typescript","Bash","Java","PHP","Tensorflow","Django","Node.js","Express.js","React.js","React Native"].join(',')));
 </script>
