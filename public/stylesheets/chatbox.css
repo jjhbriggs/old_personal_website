@@ -24,10 +24,19 @@ Modified by John Briggs, 2021
   .center {
     left: 50%;
   }
+  .chat {
+    width: 85vw;
+    height: 135vw;
+    text-align: left;
+  }
 }
 @media (min-width: 992px) {
   .center {
     left: 75%;
+  }
+  .chat {
+    width: 24rem;
+    height: 38rem;
   }
 }
 
@@ -80,8 +89,6 @@ Modified by John Briggs, 2021
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 24rem;
-  height: 38rem;
   z-index: 2;
   box-sizing: border-box;
   border-radius: 1rem;
