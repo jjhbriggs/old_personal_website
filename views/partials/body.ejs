@@ -398,8 +398,9 @@
         var content = $('div.collapse-content');
         console.log(content);
         console.log(content.css( "maxHeight" ));
+        console.log(content.css( "scrollHeight"));
         
-        if (content.css( "maxHeight" )==0){
+        if (content.css( "maxHeight" )!=0){
             content.css( "maxHeight" , 0);
             $( this ).html("<span><b>Show More</b></span>");
         } else {
