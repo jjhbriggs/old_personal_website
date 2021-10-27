@@ -372,12 +372,13 @@
 </body>
 <script>
     $('div.collapse-button').click(function(){
-        $('div.collapse-button').html("<span><b>Show Less</b></span>");
         var content = $('div.collapse-content');
-        if (content.style.maxHeight){
-        content.style.maxHeight = null;
+        if (content.css( "maxHeight" )){
+            content.css( "maxHeight" , null);
+            $( this ).html("<span><b>Show More</b></span>");
         } else {
-        content.style.maxHeight = content.scrollHeight + "px";
+            content.css( "maxHeight" , content.css( "scrollHeight")+"px");
+            $( this ).html("<span><b>Show Less</b></span>");
         } 
     });
 </script>
