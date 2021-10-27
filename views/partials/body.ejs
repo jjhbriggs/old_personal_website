@@ -252,7 +252,29 @@
             </div>
         </div>
         <div class="collapse-button"><span><b>Show More</b></span></div>
+
         </div>
+        <div class="col-lg-6">
+            <h3 class="resume-title">Education2</h3>
+            <div class="resume-item">
+                <h4>University of Pennsylvania</h4>
+                <h5>Expected Graduation: May 2025</h5>
+                <p><em>Philadelphia, PA</em></p>
+                <p>Pursuing Electrical Engineering (BSE)<br>Member of the Penn Electric Racing Software Team</p>
+            </div>
+            <div class="resume-item">
+                <h4>St. Luke's School</h4>
+                <h5>Graduated: June 2021</h5>
+                <p><em>New Canaan, CT</em></p>
+                <p>High School Diploma<br>GPA: 3.98/4.0</p>
+                <p><b>Relevant Coursework:</b><br>
+                    STEM Scholars, Honors Machine Learning, Honors Computer Systems Architecture, Honors Data Structures, AP Computer Science, Robotics, Electrical Design, Linear Algebra, Honors Multivariable Calculus, AP BC Calculus<br>
+                    <b>Awards:</b> <br>
+                    Finalist in the 2021 National Merit Scholarship Program | 2021 St. Luke's Cum Laude Society Inductee | Williams Book Award | Academic Distinctions in Design Lab (AY17-18;AY18-19), Science (AY18-19;AY19-20), Math (AY18-19;AY20-21), World Language (AY19-20), History (AY17-18)<br>
+                    <b>Activities:</b> <br>
+                    St. Luke's Hackathon, App Development Club, Varsity Tennis Captain, Varsity Squash</p>
+            </div>
+            </div>
     </div>
 
     </div>
@@ -374,8 +396,8 @@
     $('div.collapse-button').click(function(){
         alert("pressed");
         var content = $('div.collapse-content');
-        print(content);
-        print(content.css( "maxHeight" ));
+        console.log(content);
+        console.log(content.css( "maxHeight" ));
         
         if (content.css( "maxHeight" )==0){
             content.css( "maxHeight" , 0);
