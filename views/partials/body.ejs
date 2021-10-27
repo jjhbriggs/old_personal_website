@@ -372,8 +372,8 @@
 </body>
 <script>
     $('div.collapse-button').click(function(){
-        this.html("<span><b>Show Less</b></span>");
-        var content = this.nextElementSibling;
+        $('div.collapse-button').html("<span><b>Show Less</b></span>");
+        var content = $('div.collapse-content');
         if (content.style.maxHeight){
         content.style.maxHeight = null;
         } else {
