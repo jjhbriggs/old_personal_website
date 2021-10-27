@@ -19,6 +19,11 @@ Modified by John Briggs, 2021
   position: absolute;
   top: 50%;
 }
+@media (max-width: 375px) {
+  .variable_spacer {
+    height: 15rem;
+  }
+}
 @media (max-width: 992px) {
   .center {
     left: 50%;
