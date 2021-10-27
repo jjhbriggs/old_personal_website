@@ -39,8 +39,8 @@
   margin-bottom: 10px;
   cursor: pointer;
 }
-.active, .collapse-button:hover {
-  background-color: #555;
+.collapse-button:hover {
+  background-color: rgb(153, 153, 153);
 }
 .collapse-content{
   max-height: 0;
