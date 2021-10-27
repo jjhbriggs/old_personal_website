@@ -21,6 +21,11 @@ Modified by John Briggs, 2021
   left: 75%;
   transform: translate(-50%, -50%);
 }
+@media (min-width: 992px) {
+  .center {
+    left: 50%;
+  }
+}
 
 .pic {
   width: 4rem;

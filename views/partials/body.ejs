@@ -21,7 +21,7 @@
 <div class="container"  data-aos="zoom-in" data-aos-delay="100">
     <%- include ("../partials/chatbox.ejs") %>
     <h1>Sample Title</h1>
-    <p>Develops with: <span class="typed" data-typed-items="Python,Javascript,C++,C#,Rust,SQL,HTML,CSS,Typescript,Bash,Java,PHP,Tensorflow,Django,Node.js,Express.js,React.js,React Native"></span></p>
+    <p>Develops with <span class="typed" data-typed-items="Python,Javascript,C++,C#,Rust,SQL,HTML,CSS,Typescript,Bash,Java,PHP,Tensorflow,Django,Node.js,Express.js,React.js,React Native"></span></p>
     <div class="social-links">
     <a href="https://github.com/jjhbriggs" class="github" target="_blank"><i class="bx bxl-github"></i></a>
     <a href="https://www.linkedin.com/in/jjhbriggs/" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
@@ -428,5 +428,5 @@
         }
         return array;
     }
-    $("span.typed").attr("data-typed-items",shuffle(["Python","Javascript","C++","C#","Rust","SQL","HTML","CSS","Typescript","Bash","Java","PHP","Tensorflow","Django","Node.js","Express.js","React.js","React Native"]).join(','));
+    $("span.typed").attr("data-typed-items",shuffle(["Python","Javascript","C++","C#","Rust","SQL","HTML","CSS","Typescript","Java","Tensorflow","Django","Node.js","Express.js","React.js","React Native"]).join(','));
 </script>
