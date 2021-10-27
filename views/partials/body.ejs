@@ -175,8 +175,8 @@
         <p><i>View and download the printable PDF <a href="">here</a></i></p>
     </div>
 
-    <div class="row">
-        <div class="col-lg-6">
+    <div class="row" id="resumeContainer">
+        <div class="col-lg-6" id="educol">
         <h3 class="resume-title">Education</h3>
         <div class="resume-item">
             <h4>University of Pennsylvania</h4>
@@ -224,7 +224,7 @@
         </div>
         
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6" id="expcol">
         <h3 class="resume-title">Experience</h3>
         <div class="resume-item">
             <h4>Web Interface Developer</h4>
@@ -430,4 +430,14 @@
         return array;
     }
     $("span.typed").attr("data-typed-items",shuffle(["Python","Javascript","C++","C#","Rust","SQL","HTML","CSS","Typescript","Java","Tensorflow","Django","Node.js","Express.js","React.js","React Native"]).join(','));
+    $(document).ready(resumeOrdering);
+    $(window).resize(resumeOrdering);
+
+    function resumeOrdering(){
+        if($(document).width() < 992){
+            $("#educol").detach().appendTo("#resumeContainer");
+        }else{
+            $("#educol").detach().prependTo("#resumeContainer");
+        }
+    }
 </script>
