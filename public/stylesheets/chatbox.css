@@ -18,12 +18,16 @@ Modified by John Briggs, 2021
 .center {
   position: absolute;
   top: 50%;
-  left: 75%;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 992px) {
+  .center {
+    left: 50%;
+  }
 }
 @media (min-width: 992px) {
   .center {
-    left: 50%;
+    left: 75%;
   }
 }
 
