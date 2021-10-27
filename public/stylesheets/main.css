@@ -30,3 +30,20 @@
   border: none; /* Remove borders */
   cursor: pointer; /* Mouse pointer on hover */
 }
+.collapse-button{
+  font-size: 16px;
+  background: #f7f8f9;
+  padding: 5px 15px;
+  display: inline-block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.active, .collapse-button:hover {
+  background-color: #555;
+}
+.collapse-content{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}

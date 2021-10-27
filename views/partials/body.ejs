@@ -40,7 +40,7 @@
 
     <div class="row">
         <div class="col-lg-4">
-        <img src="/theme/img/profile-img.jpg" class="img-fluid" alt="">
+        <img src="images/pfp.jpg" class="img-fluid" alt="">
         </div>
         <div class="col-lg-8 pt-4 pt-lg-0 content">
         <p>I am currently studying at the Univeristy of Pennsylvania (Class of 2025), pursuing an Electrical Engineering degree with a concentration in Robotics. I have strong interests in computer science, machine learning, and autonomous robotics.</p>
@@ -226,28 +226,32 @@
             <li>2020 Darien Community Fund-Outstanding Volunteer Team Award.</li>
             </ul>
         </div>
-        <div class="resume-item">
-            <h4>Web Designer</h4>
-            <h5>Fall 2018  - Spring 2019</h5>
-            <p><em>Darien Depot</em></p>
-            <ul>
-            <li>Helped the client strategically redesign website UI and UX; programmed mobile-responsive website and content management system.</li>
-            </ul>
-        </div>
-        <div class="resume-item">
-            <h4>Certified Grade 8 Referee</h4>
-            <h5>Fall 2017  - Fall 2020</h5>
-            <p><em>Darien Soccer</em></p>
-            <ul>
-            <li>Worked with the rest of officiating team to enforce game rules, and manage pre-game/post-game responsibilities; promoted player safety; attended yearly certification training.</li>
-            </ul>
-        </div>
-        <div class="resume-item">
-            <h4>Game Development Tutor</h4>
-            <h5>Fall 2018  - Spring 2019</h5>
-            <ul>
-            <li>Tutored a middle school child in game development with Unity, as well as web development; worked with the student and their parents to develop learning objectives.</li>
-            </ul>
+
+        <div class="collapse-button"><h5>↧ Expand More ↧</h5></div>
+        <div class="collapse-content">
+            <div class="resume-item">
+                <h4>Web Designer</h4>
+                <h5>Fall 2018  - Spring 2019</h5>
+                <p><em>Darien Depot</em></p>
+                <ul>
+                <li>Helped the client strategically redesign website UI and UX; programmed mobile-responsive website and content management system.</li>
+                </ul>
+            </div>
+            <div class="resume-item">
+                <h4>Certified Grade 8 Referee</h4>
+                <h5>Fall 2017  - Fall 2020</h5>
+                <p><em>Darien Soccer</em></p>
+                <ul>
+                <li>Worked with the rest of officiating team to enforce game rules, and manage pre-game/post-game responsibilities; promoted player safety; attended yearly certification training.</li>
+                </ul>
+            </div>
+            <div class="resume-item">
+                <h4>Game Development Tutor</h4>
+                <h5>Fall 2018  - Spring 2019</h5>
+                <ul>
+                <li>Tutored a middle school child in game development with Unity, as well as web development; worked with the student and their parents to develop learning objectives.</li>
+                </ul>
+            </div>
         </div>
         </div>
     </div>
@@ -350,7 +354,6 @@
 </section><!-- End Portfolio Section -->
 
 </main><!-- End #main -->
-
 <!-- ======= Footer ======= -->
 <footer id="footer">
 <div class="container">
@@ -368,3 +371,14 @@
 <!-- <div id="preloader"></div> -->
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </body>
+<script>
+    $('div.collapse-button').click(function(){
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+        content.style.maxHeight = null;
+        } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        } 
+    });
+</script>
