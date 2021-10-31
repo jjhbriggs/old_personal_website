@@ -1,4 +1,4 @@
-// update the dg links to use actual links to sections and sites, including the "Read more about it in the ‘Recent Projects’ section."" bubbles
+//John Briggs
 const express = require('express')
 const dotenv =  require("dotenv")
 const Dialogflow = require("@google-cloud/dialogflow")
@@ -29,8 +29,6 @@ app = express()
 
 io.on('connection', async function(socket) {
   console.log(socket.id + ' connected');
-  //const client_ts = (await chat.sendMsg("[SYS_MSG] " + socket.id + " connected")).ts; 
-
   socket.on('user-message', async (msg) => {
     io.sockets.to(socket.id).emit('confirmed', msg);
     const sessionClient = new Dialogflow.SessionsClient({
@@ -61,9 +59,6 @@ io.on('connection', async function(socket) {
     } catch (e) {
       console.log(e);
     }
-
-
-    // chat.sendThreadReply("[USR_MSG]" + msg, client_ts);
   });
   socket.on('disconnect', function () {
     console.log('A user disconnected.. deleteing stuff');
