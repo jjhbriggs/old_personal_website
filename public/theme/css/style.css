@@ -251,7 +251,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 160px;
   }
 }
-#hero:before {
+/* #hero:before {
   content: "";
   background: rgba(255, 255, 255, 0.8);
   position: absolute;
@@ -259,7 +259,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   left: 0;
   right: 0;
-}
+} */
 #hero h1 {
   margin: 0;
   font-size: 64px;
