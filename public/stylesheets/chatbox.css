@@ -56,8 +56,8 @@ Modified by John Briggs, 2021
 }
 @media (min-width: 425px) {
   .chat {
-    width: 24rem;
-    height: 38rem;
+    width: 20rem;
+    height: 33rem;
   }
 }
 
